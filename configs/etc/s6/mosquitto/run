@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# setup mosquitto
+/opt/setup.sh
+
+# start sshd
+/usr/sbin/mosquitto -c /data/mqtt/config/mosquitto.conf
