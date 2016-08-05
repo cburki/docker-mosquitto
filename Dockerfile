@@ -3,7 +3,6 @@ MAINTAINER Christophe Burki, christophe.burki@gmail.com
 
 # Install system requirements
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    gnupg \
     locales \
     wget && \
     apt-get autoremove -y && \
