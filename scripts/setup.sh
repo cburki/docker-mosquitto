@@ -29,6 +29,14 @@ fi
 cp /opt/mosquitto/mosquitto.conf ${MQTT_CONF_PATH}/mosquitto.conf
 cp /opt/mosquitto/conf.d/websockets.conf ${MQTT_CONF_PATH}/conf.d/websockets.conf
 
+# Add authentication if needed
+if [ -n "${MQTT_USERNAME}" ] && [ -n "${MQTT_PASSWORD}" ]; then
+    touch ${MQTT_PATH}/password
+    mosquitto_passwd -b ${MQTT_PATH}/password ${MQTT_USERNAME} ${MQTT_PASSWORD}
+    echo "allow_anonymous false" > ${MQTT_CONF_PATH}/conf.d/authentication.conf
+    echo "password_file ${MQTT_PATH}/password" >> ${MQTT_CONF_PATH}/conf.d/authentication.conf
+fi
+
 chown -R mosquitto:mosquitto ${MQTT_PATH}
 
 
